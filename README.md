@@ -3,6 +3,7 @@
 **Datos personales**
 jorditosa
 Jordi Sanchez Torras
+https://github.com/jorditosa/PEC2  
 
 **Ejercicio_1**
 
