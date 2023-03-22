@@ -1,8 +1,10 @@
 // Llamada la función, se ejecuta el código de la función, pero no se ejecuta el código de la función que se pasa como parámetro. Esto es así porque la función que se pasa como parámetro no se ejecuta, sino que se pasa como referencia a la función que la recibe. Por tanto, la función que recibe la función como parámetro, la ejecuta cuando le conviene, en este caso, cuando se cumple la condición del if.
 const findOne = (list, { key, value }, { onSuccess, onError }) => {
+    // setTimeout simula una operación asincrona utilizando unos 2 segundos de espera en ese caso.
     setTimeout(() => {
         // find devuelve el primer elemento de un array que cumple con la condición implementada por la función proporcionada.
       const element = list.find(element => element[key] === value);
+      // Si se cumple la condición, se ejecuta la función onSuccess, si no, se ejecuta la función onError, en esta operación ternaria se comprueba la condición y se ejecuta la función correspondiente.
       element ? onSuccess(element) : onError({ msg: 'ERROR: Element Not Found' });
     }, 2000);
   };

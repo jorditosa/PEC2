@@ -1,11 +1,9 @@
 // Eliminado callbacks y usada promesa, el then está en el resolve y el catch en el reject.
 const findOne = (list, { key, value }) => {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
             // find devuelve el primer elemento de un array que cumple con la condición implementada por la función proporcionada.
             const element = list.find(element => element[key] === value);
             element ? resolve(element) : reject({ msg: 'ERROR: Element Not Found' });
-        }, 2000);
     });
 };
   

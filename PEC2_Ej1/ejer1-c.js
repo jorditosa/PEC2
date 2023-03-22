@@ -1,11 +1,8 @@
-// crear la función findOne con async/await
+// Simplemente se ha añadido la palabra async a la declaración de la función, y el await está en el resolve y el reject.
 const findOne = async (list, { key, value }) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
             const element = list.find(element => element[key] === value);
-            element ? resolve(element) : reject({ msg: 'ERROR: Element Not Found' });
-        }, 2000);
-    });
+            //se ha añadido la palabra await en element porque es una promesa asíncrona.
+            await element ? element : { msg: 'ERROR: Element Not Found' };
 };
 
 // Las funciones onSuccess y onError se ejecutan cuando se cumple la condición del if. Ahora se ejecutan con await.
