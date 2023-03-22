@@ -1,4 +1,3 @@
-
 const findOne = async (list, { key, value }) => {
     const element = list.find(element => element[key] === value);
     //se ha añadido la palabra await en element porque es una promesa asíncrona.
