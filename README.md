@@ -10,7 +10,7 @@ En los primeros ejercicios, siguiendo las instrucciones, comienzo con eliminar l
 
 Seguidamente, en la preparación del async, declaro todas las funciones como asyncronas, y elimino la promesa de la función principal findOne, porque con esta declaración la función ya pasa a ser asíncrona.
 
-finalmente, para ejecutar promesas en paralelo, utilizo el PromiseAll y pongo las dos funciones findOne dentro de un array, y tal cúal se indica se llamaran a la vez sin que la segunda deba esperar al resultado de la primera.
+Finalmente, para ejecutar promesas en paralelo, utilizo el PromiseAll y pongo las dos funciones findOne dentro de un array, y tal cúal se indica se llamaran a la vez sin que la segunda deba esperar al resultado de la primera.
 
 **Ejercicio_2**
 
