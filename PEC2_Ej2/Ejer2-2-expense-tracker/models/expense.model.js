@@ -1,17 +1,5 @@
 class ExpenseModel {
     constructor() {
-        this.expenses = [];
+        this.expenses = [ id, text, amount ];
     }
-
-    addExpense(expense) {
-        this.expenses.push(expense);
-    }
-
-    getExpenses() {
-        return this.expenses;
-    }
-
-    deleteExpense(index) {
-        this.expenses.splice(index, 1);
-    }
-}
+} 
