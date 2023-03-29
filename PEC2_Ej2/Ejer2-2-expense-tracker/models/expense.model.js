@@ -1,6 +1,8 @@
 export class ExpenseModel {
-    constructor() {
-        this.expenses = [ id, text, amount ];
+    constructor(id, text, amount) {
+        this.expenses = [
+            { id, text, amount },
+        ];
     }
 
     addExpense(id, text, amount) {
@@ -16,7 +18,7 @@ export class ExpenseModel {
         expense.text = text;
         expense.amount = amount;
     }
-    
+
     getExpenses() {
         return this.expenses;
     }
