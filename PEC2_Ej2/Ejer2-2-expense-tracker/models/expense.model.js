@@ -31,4 +31,15 @@ export class ExpenseModel {
         return this.expenses.reduce((total, expense) => total + expense.amount, 0);
     }
 
+    getIncome() {
+        return this.expenses
+            .filter(expense => expense.amount > 0)
+            .reduce((total, expense) => total + expense.amount, 0);
+    }
+
+    getExpense() {
+        return this.expenses
+            .filter(expense => expense.amount < 0)
+            .reduce((total, expense) => total + expense.amount, 0);
+    }
 } 
