@@ -1,4 +1,4 @@
-class ExpenseModel {
+export class ExpenseModel {
     constructor() {
         this.expenses = [ id, text, amount ];
     }
@@ -11,6 +11,12 @@ class ExpenseModel {
         this.expenses = this.expenses.filter(expense => expense.id !== id);
     }
 
+    updateExpense(id, text, amount) {
+        const expense = this.getExpense(id);
+        expense.text = text;
+        expense.amount = amount;
+    }
+    
     getExpenses() {
         return this.expenses;
     }
@@ -22,6 +28,5 @@ class ExpenseModel {
     getTotal() {
         return this.expenses.reduce((total, expense) => total + expense.amount, 0);
     }
-    
 
 } 
