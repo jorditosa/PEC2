@@ -15,16 +15,26 @@ class ExpenseModel {
     this.expenses = [];
   }
 
-  addExpense(text, amount) {
-    const expense = new Expense(text, amount);
-    this.expenses = [...this.expenses, expense];
+    addExpense(text, amount) {
+        const expense = new Expense(text, amount);
+        this.expenses = [...this.expenses, expense];
   }
 
-  getExpense(index) {
-    return this.expenses[index];
+    editExpense(index, text, amount) {
+        const expense = this.expenses[index];
+        expense.text = text;
+        expense.amount = amount;
+    }
+
+    removeExpense(index) {
+        this.expenses.splice(index, 1);
+    }
+
+    getExpense(index) {
+        return this.expenses[index];
   }
 
-  removeExpense(index) {
-    this.expenses.splice(index, 1);
-  }
+    getExpenses() {
+        return this.expenses;
+    }
 }

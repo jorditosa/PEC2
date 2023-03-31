@@ -1,0 +1,15 @@
+{
+  "name": "ejer2-2-expense-tracker",
+  "version": "1.0.0",
+  "description": "Keep track of income and expenses. Add and remove items and save to local storage",
+  "main": "app.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^4.2.1"
+  }
+}
