@@ -18,6 +18,7 @@ class ExpenseModel {
     addExpense(text, amount) {
         const expense = new Expense(text, amount);
         this.expenses = [...this.expenses, expense];
+        console.log(this.expenses)
   }
 
     editExpense(index, text, amount) {

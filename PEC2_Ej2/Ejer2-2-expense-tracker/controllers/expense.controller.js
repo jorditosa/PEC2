@@ -29,6 +29,11 @@ class ExpenseController {
         const expenses = this.getExpenses();
         this.view.displayExpenses(expenses);
     }
+
+    displayBalance() {
+        const expenses = this.getExpenses();
+        this.view.displayBalance(expenses);
+    }
     
     init() {
         this.displayExpenses(); // Llamamos al método para mostrar las expenses al iniciar la aplicación
@@ -36,7 +41,18 @@ class ExpenseController {
             e.preventDefault();
             this.addExpense(this.view.expenseText, this.view.expenseAmount);
             this.displayExpenses();
+            this.displayBalance();
         });
+
+        this.view.expenseList.addEventListener("click", (e) => {
+            if (e.target.classList.contains("delete-btn")) {
+                const index = e.target.dataset.index;
+                this.removeExpense(index);
+                this.displayExpenses();
+            }
+        }
+        );
+
     }
     
 

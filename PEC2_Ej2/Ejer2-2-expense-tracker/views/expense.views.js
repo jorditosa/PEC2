@@ -42,7 +42,8 @@ class ExpenseViews {
     }
 
     displayBalance(expenses) {
-        const amounts = expenses.map(expense => expense.amount);
+        console.log(expenses)
+        const amounts = expenses.map(expense => +expense.amount);
         const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
         const income = amounts
           .filter(item => item > 0)
