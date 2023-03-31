@@ -39,10 +39,21 @@ class ExpenseController {
     init() {
         this.displayExpenses(); // Llamamos al método para mostrar las expenses al iniciar la aplicación
         this.view.form.addEventListener("submit", (e) => {
-            e.preventDefault();
+            e.preventDefault();  
+
+            // Validaciones
+            if (this.view.expenseText === "" || this.view.expenseAmount === "") {
+                alert("Por favor, introduzca un concepto");
+                return;
+            }
+
             this.addExpense(this.view.expenseText, this.view.expenseAmount);
             this.displayExpenses();
             this.displayBalance();
+
+            // Eliminar input values
+            this.view.text.value = "";
+            this.view.amount.value = "";
         });
 
         this.view.expenseList.addEventListener("click", (e) => {

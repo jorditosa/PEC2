@@ -33,7 +33,7 @@ class ExpenseViews {
         const expenseList = expenses.map((expense, i) => {
             const expenseItem = this.createElement("li", expense.amount < 0 ? "minus" : "plus");
             expenseItem.innerHTML = `
-            ${expense.text} <span>-$${expense.amount}</span> <button class="delete-btn" onclick="app.removeExpense(${i})">x</button>
+            ${expense.text} <span>${expense.amount} €</span> <button class="delete-btn" onclick="app.removeExpense(${i})">X</button>
             `;
             return expenseItem;
         });
@@ -54,9 +54,9 @@ class ExpenseViews {
           -1
         ).toFixed(2);
     
-        this.balance.innerText = `$${total}`;
-        this.moneyPlus.innerText = `$${income}`;
-        this.moneyMinus.innerText = `$${expense}`;
+        this.balance.innerText = `${total} €`;
+        this.moneyPlus.innerText = `${income} €`;
+        this.moneyMinus.innerText = `${expense} €`;
       }
 
 }
