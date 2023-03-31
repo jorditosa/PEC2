@@ -28,7 +28,7 @@ class ExpenseModel {
     }
 
     removeExpense(index) {
-        this.expenses.splice(index, 1);
+        this.expenses = this.expenses.filter((expense, i) => i !== index);
     }
 
     getExpense(index) {

@@ -35,6 +35,7 @@ class ExpenseController {
         this.view.displayBalance(expenses);
     }
     
+    // En esta función he montado todo los event listeners
     init() {
         this.displayExpenses(); // Llamamos al método para mostrar las expenses al iniciar la aplicación
         this.view.form.addEventListener("submit", (e) => {
@@ -46,9 +47,11 @@ class ExpenseController {
 
         this.view.expenseList.addEventListener("click", (e) => {
             if (e.target.classList.contains("delete-btn")) {
-                const index = e.target.dataset.index;
-                this.removeExpense(index);
+                const id = e.target.parentElement;
+                console.log(e.target.parentElement)
+                this.removeExpense(id);
                 this.displayExpenses();
+                this.displayBalance();
             }
         }
         );
