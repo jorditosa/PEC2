@@ -12,6 +12,12 @@ class ExpenseViews {
         this.amount = document.getElementById("amount");
 
     }
+    
+    // Obtener los primeros resultados guardados en local storage
+    getExpensesFromLocalStorage() {
+        return JSON.parse(localStorage.getItem("expenses"));
+    }
+
 
     get expenseText() {
         return this.text.value;

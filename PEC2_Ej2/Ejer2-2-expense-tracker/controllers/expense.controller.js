@@ -28,11 +28,23 @@ class ExpenseController {
     displayExpenses() {
         const expenses = this.getExpenses();
         this.view.displayExpenses(expenses);
+
+        // obtener desde local storage
+        const expensesFromLocalStorage = this.view.getExpensesFromLocalStorage();
+        if (expensesFromLocalStorage) {
+            this.view.displayExpenses(expensesFromLocalStorage);
+        }
     }
 
     displayBalance() {
         const expenses = this.getExpenses();
         this.view.displayBalance(expenses);
+
+        // obtener desde local storage
+        const expensesFromLocalStorage = this.view.getExpensesFromLocalStorage();
+        if (expensesFromLocalStorage) {
+            this.view.displayBalance(expensesFromLocalStorage);
+        }
     }
     
     // En esta función he montado todo los event listeners
