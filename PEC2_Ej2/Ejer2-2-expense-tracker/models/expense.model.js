@@ -18,7 +18,9 @@ class ExpenseModel {
     addExpense(text, amount) {
         const expense = new Expense(text, amount);
         this.expenses = [...this.expenses, expense];
-        console.log(this.expenses)
+        
+        // Guardar en local storage
+        this.saveExpensesToLocalStorage(this.expenses);
   }
 
     editExpense(index, text, amount) {
@@ -32,10 +34,30 @@ class ExpenseModel {
     }
 
     getExpense(index) {
+        // obtener desde local storage
+        const expensesFromLocalStorage = this.getExpensesFromLocalStorage();
+
+        // Mostrar los resultados guardados en local storage
+        expensesFromLocalStorage.forEach(expense => {
+            const expenseItem = this.createElement("li", expense.amount < 0 ? "minus" : "plus");
+            expenseItem.innerHTML = `
+            ${expense.text} <span>${expense.amount} €</span> <button class="delete-btn" onclick="app.removeExpense(${expense.id})">X</button>
+            `;
+            this.expenseList.append(expenseItem);
+        });
+
         return this.expenses[index];
   }
 
     getExpenses() {
         return this.expenses;
+    }
+
+    saveExpensesToLocalStorage(expenses) {
+        localStorage.setItem("expenses", JSON.stringify(expenses));
+    }
+
+    getExpensesFromLocalStorage() {
+        return JSON.parse(localStorage.getItem("expenses"));
     }
 }

@@ -5,8 +5,12 @@ class ExpenseController {
 
     };
 
+    //Cramos el CRUD de la aplicación con add, edit, remove y get
     addExpense(text, amount) {
         this.model.addExpense(text, amount);
+
+        // Guardar en local storage
+        this.model.saveExpensesToLocalStorage(this.model.expenses);
     }
 
     editExpense(index, text, amount) {
@@ -28,12 +32,6 @@ class ExpenseController {
     displayExpenses() {
         const expenses = this.getExpenses();
         this.view.displayExpenses(expenses);
-
-        // obtener desde local storage
-        const expensesFromLocalStorage = this.view.getExpensesFromLocalStorage();
-        if (expensesFromLocalStorage) {
-            this.view.displayExpenses(expensesFromLocalStorage);
-        }
     }
 
     displayBalance() {
@@ -42,30 +40,27 @@ class ExpenseController {
 
         // obtener desde local storage
         const expensesFromLocalStorage = this.view.getExpensesFromLocalStorage();
-        if (expensesFromLocalStorage) {
-            this.view.displayBalance(expensesFromLocalStorage);
-        }
     }
     
     // En esta función he montado todo los event listeners
     init() {
-        this.displayExpenses(); // Llamamos al método para mostrar las expenses al iniciar la aplicación
+        this.displayExpenses();
+        this.displayBalance();
+        
         this.view.form.addEventListener("submit", (e) => {
             e.preventDefault();  
 
-            // Validaciones
-            if (this.view.expenseText === "" || this.view.expenseAmount === "") {
-                alert("Por favor, introduzca un concepto");
-                return;
+            const text = this.view.expenseText;
+            const amount = this.view.expenseAmount;
+
+            if (text !== "" && amount !== "") {
+                this.addExpense(text, amount);
+                this.displayExpenses();
+                this.displayBalance();
+                this.view.form.reset();
             }
 
-            this.addExpense(this.view.expenseText, this.view.expenseAmount);
-            this.displayExpenses();
-            this.displayBalance();
 
-            // Eliminar input values
-            this.view.text.value = "";
-            this.view.amount.value = "";
         });
 
         this.view.expenseList.addEventListener("click", (e) => {

@@ -13,9 +13,17 @@ class ExpenseViews {
 
     }
     
-    // Obtener los primeros resultados guardados en local storage
     getExpensesFromLocalStorage() {
-        return JSON.parse(localStorage.getItem("expenses"));
+      if(localStorage.getItem("expenses") === null) {
+        localStorage.setItem("expenses", JSON.stringify([]));
+      }
+
+      return JSON.parse(localStorage.getItem("expenses"));
+    }
+
+    // Guardar en local storage
+    saveExpensesToLocalStorage(expenses) {
+        localStorage.setItem("expenses", JSON.stringify(expenses));
     }
 
 
@@ -36,6 +44,17 @@ class ExpenseViews {
       }
 
     displayExpenses(expenses) {
+        // obtener desde local storage
+        const expensesFromLocalStorage = this.getExpensesFromLocalStorage();
+        // Mostrar los resultados guardados en local storage
+        expensesFromLocalStorage.forEach(expense => {
+            const expenseItem = this.createElement("li", expense.amount < 0 ? "minus" : "plus");
+            expenseItem.innerHTML = `
+            ${expense.text} <span>${expense.amount} €</span> <button class="delete-btn" onclick="app.removeExpense(${expense.id})">X</button>
+            `;
+            this.expenseList.append(expenseItem);
+        });
+
         const expenseList = expenses.map((expense, i) => {
             const expenseItem = this.createElement("li", expense.amount < 0 ? "minus" : "plus");
             expenseItem.innerHTML = `
