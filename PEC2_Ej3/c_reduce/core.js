@@ -1,17 +1,42 @@
 function sum(array) {
-  // your code here
+  const total = array.reduce((expected, actual) => {
+    return expected + actual;
+  }
+  );
+  return total;
 }
 
 function productAll(array) {
-  // your code here
+  // primero aplanamos el array
+  const flatArray = array.flat();
+  // luego lo multiplicamos
+  const total = flatArray.reduce((expected, actual) => {
+    return expected * actual;
+  }
+  );
+  return total;
 }
 
 function objectify(array) {
-  // your code here
+  const object = array.reduce((expected, actual) => {
+    expected[actual[0]] = actual[1];
+    return expected;
+  }
+  , {});
+  return object;
 }
 
 function luckyNumbers(array) {
-  // your code here
+  const sentence = array.reduce((expected, actual, index) => {
+    if (index === array.length - 1) {
+      expected += `and ${actual}`;
+    } else {
+      expected += `${actual}, `;
+    }
+    return expected;
+  }
+  , 'Your lucky numbers are: ');
+  return sentence;
 }
 
 module.exports = {
