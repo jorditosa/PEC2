@@ -1,4 +1,4 @@
-class View {
+class ExpenseView {
   constructor() {
     this.balance = document.getElementById('balance');
     this.money_plus = document.getElementById('money-plus');

@@ -1,0 +1,1 @@
+const app = new ExpenseController(new Expense(), new ExpenseServices(), new ExpenseView() )
