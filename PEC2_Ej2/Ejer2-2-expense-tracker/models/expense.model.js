@@ -1,8 +1,8 @@
 class Expense {
-    constructor( text, amount) {
-      this.id = this.uuid();
+    constructor( {id, text, amount}) {
+      this.id = id || this.uuid();
       this.text = text;
-      this.amount = amount;
+      this.amount = +amount;
     }
 
     uuid() {

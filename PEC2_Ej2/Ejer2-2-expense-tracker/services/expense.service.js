@@ -17,15 +17,15 @@ class ExpenseService {
     }
 
     addExpense(text, amount) {
-        const expense = new Expense(text, amount);
+        const expense = new Expense({text, amount});
         this.expenses = [...this.expenses, expense];
 
         this._commit(this.expenses)
     }
 
-    editExpense( id, updatedText, updatedAmount) {
+    editExpense( _id, updatedText, updatedAmount) {
         this.expenses = this.expenses.map(expense => {
-            expense.id === id ? new Expense({
+            expense.id === _id ? new Expense({
                 ...expense,
                 text: updatedText,
                 amount: updatedAmount
@@ -37,8 +37,17 @@ class ExpenseService {
     }
 
     deleteExpense(_id) {
-        this.expenses = this.expenses.filter(({ id }) => id !== id);
+        const filteredExpenses = this.expenses.filter(({ id }) => id !== _id);
+        this.expenses = filteredExpenses;
+        this._commit(this.expenses);
+        return filteredExpenses;
+    }
 
-        this._commit(this.expenses)
+    updateBalance() {
+        let balance = 0;
+        this.expenses.forEach(expense => {
+            balance += expense.amount;
+        });
+        return balance;
     }
 }

@@ -17,6 +17,10 @@ class ExpenseView {
     return this.amount.value;
   }
 
+  get _balance() {
+    return this.balance.value;
+  }
+
   resetInputs() {
     this.text.value = ""
     this.amount.value = ""
@@ -74,6 +78,18 @@ class ExpenseView {
      console.log(expenses)
   }
 
+  displayBalance(balance) {
+    this.balance.textContent = balance;
+  }
+
+  displayIncome(income) {
+    this.money_plus.textContent = income;
+  }
+
+  displayExpense(expense) {
+    this.money_minus.textContent = expense;
+  }
+
   bindAddExpense(handler) {
     this.form.addEventListener("submit", e => {
       e.preventDefault();
@@ -89,7 +105,7 @@ class ExpenseView {
   bindDeleteExpense(handler) {
     this.list.addEventListener("click", e => {
       if(e.target.classList.contains("delete-btn")) {
-        const id = e.target.parentElement.id;
+        const id = +(e.target.parentElement.id);
         handler(id)
       }
     });    
@@ -104,4 +120,9 @@ class ExpenseView {
       }
     });
   } 
+
+  bindUpdateBalance(handler) {
+
+  }
+
 }
