@@ -7,27 +7,22 @@ class ExpenseView {
     this.form = document.getElementById('form');
     this.text = document.getElementById('text');
     this.amount = document.getElementById('amount');
+
+    this.initLocalListeners();
   }
 
-  get _expenseText() {
+  get expenseText() {
     return this.text.value;
   }
 
-  get _expenseAmount() {
+  get expenseAmount() {
     return this.amount.value;
   }
 
-  _resetInput() {
-    this.text.value = '';
-    this.amount.value = '';
+  resetInputs() {
+    this.text.value = ""
+    this.amount.value = ""
   }
 
-  createElement(tag, className) {
-    const element = document.createElement(tag);
-
-    if (className) element.classList.add(className);
-
-    return element;
-  }
-  
+ 
 }
