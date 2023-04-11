@@ -9,5 +9,25 @@ class ExpenseView {
     this.amount = document.getElementById('amount');
   }
 
+  get _expenseText() {
+    return this.text.value;
+  }
+
+  get _expenseAmount() {
+    return this.amount.value;
+  }
+
+  _resetInput() {
+    this.text.value = '';
+    this.amount.value = '';
+  }
+
+  createElement(tag, className) {
+    const element = document.createElement(tag);
+
+    if (className) element.classList.add(className);
+
+    return element;
+  }
   
 }
