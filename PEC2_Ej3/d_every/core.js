@@ -1,29 +1,21 @@
 
 function allEven(input) {
-  input.every((element) => {
-    if (element % 2 === 0) {
-      return true;
-    } else {
-      return false;
-    }
+  return input.every((element) => {
+    return element % 2 === 0
   });
-
-  return input;
 }
 
 // Check to see if all elements in an array
 // are of the same type.
 
 function allSameType(input) {
-  input.every((element) => {
+  return input.every((element) => {
     if (typeof element === typeof input[0]) {
       return true;
     } else {
       return false;
     }
   });
-  
-  return input;
 }
 
 // Check to see if every element in the matrix is
@@ -31,47 +23,38 @@ function allSameType(input) {
 // greater than 0.
 
 function positiveMatrix(input) {
-  input.every((element) => {
-    if (Array.isArray(element)) {
-      element.every((element) => {
-        if (element > 0) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-    } else {
+  return input.every((element) => {
+    if (!Array.isArray(element)) {
       return false;
     }
-  });
 
-  return input;
+    return element.every((num) => num > 0);
+  });
 }
 
 // Check that all items in an array are strings
 // and that they all only contain the same vowels.
 
 function allSameVowels(input) {
-  input.every((element) => {
-    if (typeof element === "string") {
-      let vowels = ["a", "e", "i", "o", "u"];
-      let elementVowels = [];
-      element.split("").forEach((letter) => {
-        if (vowels.includes(letter)) {
-          elementVowels.push(letter);
-        }
-      });
-      if (elementVowels.every((element) => element === elementVowels[0])) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
+  // Check that all items in the array are strings
+  const allStrings = input.every((element) => typeof element === 'string');
+  if (!allStrings) {
+    return false;
+  }
+
+  // Check that all items in the array only contain the same vowels
+  const vowels = ['a', 'e', 'i', 'o', 'u'];
+
+  for (let i = 1; i < input.length; i++) {
+    const currentStringVowels = input[i].toLowerCase().match(/[aeiou]/g);
+    if (
+      !currentStringVowels ||
+      currentStringVowels.length !== firstStringVowels.length ||
+      currentStringVowels.some((vowel, index) => vowel !== firstStringVowels[index])
+    ) {
       return false;
     }
-  });
-  
-  return input;
+  }
 }
 
 module.exports = {
