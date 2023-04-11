@@ -1,6 +1,10 @@
 class ExpenseService {
     constructor() {
-        this.expenses = (JSON.parse(localStorage.getItem("expenses")) || []).map( expense => new Expense(expense))
+        this.expenses = (JSON.parse(localStorage.getItem("expenses")) || []).map(
+            expense => new Expense(expense)
+        );
+
+        this.onExpenseListChange = null;
     }
     
     bindExpenseListChanged(callback) {
@@ -13,7 +17,8 @@ class ExpenseService {
     }
 
     addExpense(text, amount) {
-        this.expenses.push(new Expense({text, amount}));
+        const expense = new Expense(text, amount);
+        this.expenses = [...this.expenses, expense];
 
         this._commit(this.expenses)
     }
@@ -31,7 +36,7 @@ class ExpenseService {
         this._commit(this.expenses)
     }
 
-    deleteExpense(id) {
+    deleteExpense(_id) {
         this.expenses = this.expenses.filter(({ id }) => id !== id);
 
         this._commit(this.expenses)

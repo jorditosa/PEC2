@@ -6,7 +6,7 @@ class Expense {
     }
 
     uuid() {
-        return Math.floor(Math.random() * 100000000);
+        return new Date().getTime();
         }
 
   }

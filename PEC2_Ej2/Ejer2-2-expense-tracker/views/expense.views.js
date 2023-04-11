@@ -7,10 +7,6 @@ class ExpenseView {
     this.form = document.getElementById('form');
     this.text = document.getElementById('text');
     this.amount = document.getElementById('amount');
-
-    this.expenseList = this.createElement("ul", "expense-list");
-
-    this.initLocalListeners();
   }
 
   get _expenseText() {
@@ -42,50 +38,40 @@ class ExpenseView {
 
   displayExpenses(expenses) {
     // Eliminar nodos
-    while(this.expenseList.firstChild) {
-      this.expenseList.removeChild(this.expenseList.firstChild)
-    }
+    this.list.innerHTML = "";
 
     // Mostrar un mensaje si no hay ningún dato y sino crear la lista en el DOM
     if(expenses.length === 0) {
       const p = this.createElement("p");
       p.textContent = "No hay ningún movimiento."
-      this.expenseList.append(p)
+      this.list.appendChild(p)
     } else {
       // Crear nodos
       expenses.forEach(expense => {
         const li = this.createElement("li");
-        li.is = expense.id;
+        li.id = expense.id;
 
-        const text = this.createElement("p");
-        text.textContent = expense.text;
+        const textNode = this.createElement("p");
+        textNode.textContent = expense.text;
 
-        const amount = this.createElement("span");
-        amount.textContent = expense.amount;
+        const amountNode = this.createElement("span");
+        amountNode.textContent = expense.amount;
 
         // Boton eliminar
-        const deleteButton = this.createElement("button", "delete");
+        const deleteButton = this.createElement("button", "delete-btn");
         deleteButton.textContent = "X";
 
         //Montar todo el nodo
-        li.append(text, amount, deleteButton)
+        li.classList.add(expense.amount < 0 ? "minus" : "plus")
+        li.append(textNode, amountNode, deleteButton)
+
+        // Montar el nodo en el DOM
+        this.list.appendChild(li)
       });
     }
 
      // Debugging
      console.log(expenses)
-  }
-
-  initLocalListeners() {
-    this.form.addEventListener("submit", e => {
-      e.preventDefault();
-
-      if(this._expenseText && this._expenseAmount) {
-        handler(this._expenseText, this._expenseAmount)
-      }
-
-      this.resetInputs()
-    })
   }
 
   bindAddExpense(handler) {
@@ -101,8 +87,8 @@ class ExpenseView {
   }
 
   bindDeleteExpense(handler) {
-    this.expenseList.addEventListener("click", e => {
-      if(e.target.classList.contains("delete")) {
+    this.list.addEventListener("click", e => {
+      if(e.target.classList.contains("delete-btn")) {
         const id = e.target.parentElement.id;
         handler(id)
       }
@@ -110,7 +96,7 @@ class ExpenseView {
   }
 
   bindEditExpense(handler) {
-    this.expenseList.addEventListener("input", e => {
+    this.list.addEventListener("input", e => {
       if(e.target.classList.contains("editable")) {
         const id = e.target.parentElement.id;
         const text = e.target.innerText;

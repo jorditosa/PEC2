@@ -117,6 +117,7 @@ input[type='number'] {
   color: #333;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
   padding: 10px;
   margin: 10px 0;

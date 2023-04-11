@@ -4,7 +4,7 @@ class ExpenseController {
         this.view = view;
 
         //Vinculación explicita
-        this.service.bindExpenseListChanged(this.onExpenseListChange);
+        this.service.bindExpenseListChanged(this.onExpenseListChanged.bind(this));
         this.view.bindAddExpense(this.handleAddExpense);
         this.view.bindDeleteExpense(this.handleDeleteExpense);
         this.view.bindEditExpense(this.handleEditExpense);
