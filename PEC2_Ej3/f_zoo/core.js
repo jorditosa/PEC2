@@ -58,7 +58,9 @@ function animalsByIds(ids) {
 }
 
 function animalByName(animalName) {
-  // your code here
+  const animals = data.animals;
+  const animalByName = animals.find(animal => animal.name === animalName);
+  return animalByName;
 }
 
 function employeesByIds(ids) {
