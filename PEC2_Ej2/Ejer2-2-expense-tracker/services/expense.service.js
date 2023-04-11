@@ -2,8 +2,12 @@ class ExpenseService {
     constructor() {
         this.expenses = (JSON.parse(localStorage.getItem("expenses")) || []).map( expense => new Expense(expense))
     }
+    
+    bindExpenseListChanged(callback) {
+        this.onExpenseListChange = callback;
+    }
 
-    commit(expenses) {
+    _commit(expenses) {
         this.onExpenseListChange(expenses);
         localStorage.setItem("expenses", JSON.stringify(expenses));
     }
@@ -11,7 +15,7 @@ class ExpenseService {
     addExpense(text, amount) {
         this.expenses.push(new Expense({text, amount}));
 
-        this.commit(this.expenses)
+        this._commit(this.expenses)
     }
 
     editExpense( id, updatedText, updatedAmount) {
@@ -24,13 +28,12 @@ class ExpenseService {
             : expense
         })
 
-        this.commit(this.expenses)
+        this._commit(this.expenses)
     }
 
     deleteExpense(id) {
         this.expenses = this.expenses.filter(({ id }) => id !== id);
-        
-        this.commit(this.expenses)
-    }
 
+        this._commit(this.expenses)
+    }
 }
