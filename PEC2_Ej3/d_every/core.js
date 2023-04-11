@@ -36,25 +36,20 @@ function positiveMatrix(input) {
 // and that they all only contain the same vowels.
 
 function allSameVowels(input) {
-  // Check that all items in the array are strings
-  const allStrings = input.every((element) => typeof element === 'string');
-  if (!allStrings) {
+  // Check that all items in the array are strings.
+  if (!input.every((element) => typeof element === 'string')) {
     return false;
   }
 
-  // Check that all items in the array only contain the same vowels
-  const vowels = ['a', 'e', 'i', 'o', 'u'];
-
-  for (let i = 1; i < input.length; i++) {
-    const currentStringVowels = input[i].toLowerCase().match(/[aeiou]/g);
-    if (
-      !currentStringVowels ||
-      currentStringVowels.length !== firstStringVowels.length ||
-      currentStringVowels.some((vowel, index) => vowel !== firstStringVowels[index])
-    ) {
-      return false;
-    }
-  }
+  const vowels = new Set(["a", "e", "i", "o", "u"]);
+  const firstWord = input[0].toLowerCase();
+  const vowelSet = new Set(
+    firstWord.split("").filter((char) => vowels.has(char))
+  );
+  return input.every(
+    (word) =>
+      new Set(word.toLowerCase().split("").filter((char) => vowels.has(char))).size === vowelSet.size
+  );
 }
 
 module.exports = {

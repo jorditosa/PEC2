@@ -1,4 +1,4 @@
-function entryCalculator(entrants) {
+function entryCalculator(entrants = 0) {
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
   return Adult * 49.99 + Senior * 24.99 + Child * 20.99;
 }
@@ -20,51 +20,33 @@ function schedule(dayName) {
 }
 
 function animalCount(species) {
-  const animals = data.animals;
-  const animalsCount = animals.reduce((acc, animal) => {
-    const { name, residents } = animal;
-    acc[name] = residents.length;
-    return acc;
-  }
-  , {});
-  if (species) {
-    return animalsCount[species];
-  }
-  return animalsCount;
+
 }
 
 function animalMap(options) {
-  // your code here
+ 
 }
 
 function animalPopularity(rating) {
-  const animals = data.animals;
-  const animalsByPopularity = animals.reduce((acc, animal) => {
-    const { name, residents } = animal;
-    const popularity = residents.length;
-    if (popularity >= rating) {
-      acc[name] = popularity;
-    }
-    return acc;
-  }
-  , {});
-  return animalsByPopularity;
+ 
 }
 
 function animalsByIds(ids) {
-  const animals = data.animals;
-  const animalsById = animals.filter(animal => ids.includes(animal.id));
-  return animalsById;
+  // with no parameters, returns an empty array
+  if (!ids) return [];
+  
 }
 
 function animalByName(animalName) {
-  const animals = data.animals;
-  const animalByName = animals.find(animal => animal.name === animalName);
-  return animalByName;
+  //with no parameters, returns an empty object
+  if (!animalName) return {};
+
 }
 
-function employeesByIds(ids) {
-  // your code here
+function employeesByIds(ids = []) {
+  const employees = data.employees;
+  const employeesById = employees.filter(employee => ids.includes(employee.id));
+  return employeesById;
 }
 
 function employeeByName(employeeName) {
