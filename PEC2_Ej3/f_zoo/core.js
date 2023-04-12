@@ -40,9 +40,10 @@ function animalCount(species) {
 }
 
 function animalMap(options) {
+  const animals = data.animals;
   if (!options || !options.includeNames) {
     const locations = {};
-    data.animals.forEach(animal => {
+    animals.forEach(animal => {
       if (!locations[animal.location]) {
         locations[animal.location] = [];
       }
@@ -50,24 +51,52 @@ function animalMap(options) {
     });
     return locations;
   }
+
+  animals.forEach(animal => {
+    const locations = {};
+    if (!locations[animal.location]) {
+      locations[animal.location] = [];
+    }
+    if (options.includeNames) {
+      locations[animal.location].push({
+        [animal.name]: animal.residents.map(resident => resident.name)
+      });
+    }
+    return locations;
+  }
+  );
 }
 
 function animalPopularity(rating) {
   const animals = data.animals;
-  if(!rating) {
-    const animalsByPopularity = animals.sort((a, b) => b.residents.length - a.residents.length);
+  if (!rating) {
+    const animalsByPopularity = {};
+    animals.forEach(animal => {
+      if (!animalsByPopularity[animal.popularity]) {
+        animalsByPopularity[animal.popularity] = [];
+      }
+      animalsByPopularity[animal.popularity].push(animal.name);
+    });
     return animalsByPopularity;
   }
 
   if (rating) {
     const animalsByRating = animals.filter(animal => animal.rating === rating);
-    return animalsByRating;
+    return animalsByRating.map(animal => animal.name);
   }
 }
 
 function animalsByIds(ids) {
-  // with no parameters, returns an empty array
+  const animals = data.animals;
   if (!ids) return [];
+
+  if (ids.length === 1) {
+    const animal = animals.find(animal => animal.id === ids[0]);
+    return [animal];
+  }
+
+  const animalsById = animals.filter(animal => ids.includes(animal.id));
+  return animalsById;
   
 }
 
@@ -77,6 +106,7 @@ function animalByName(animalName) {
   const animal = animals.find(animal => animal.name === animalName);
   return animal;
 }
+
 
 function employeesByIds(ids = []) {
   const employees = data.employees;
@@ -92,11 +122,29 @@ function employeeByName(employeeName) {
 }
 
 function managersForEmployee(idOrName) {
-  
+  const employees = data.employees;
+  const employee = employees.find(employee => employee.id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName);
+  const managers = employees.filter(manager => employee.managers.includes(manager.id));
+  return managers;
 }
 
 function employeeCoverage(idOrName) {
-  // your code here
+  if (!idOrName) {
+    const employees = data.employees;
+    const employeesCoverage = {};
+    employees.forEach(employee => {
+      employeesCoverage[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map(id => animalByName(id).name);
+    });
+    return employeesCoverage;
+  }
+
+  if (idOrName) {
+    const employee = employeesByIds([idOrName])[0];
+    const employeeCoverage = {};
+    employeeCoverage[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map(id => animalByName(id).name);
+    return employeeCoverage;
+  }
+
 }
 
 module.exports = {
