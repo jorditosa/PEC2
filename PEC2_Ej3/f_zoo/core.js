@@ -52,19 +52,23 @@ function animalMap(options) {
     return locations;
   }
 
-  animals.forEach(animal => {
+ // with specified options, returns names of animals
+  if (options.includeNames) {
     const locations = {};
-    if (!locations[animal.location]) {
-      locations[animal.location] = [];
-    }
-    if (options.includeNames) {
-      locations[animal.location].push({
-        [animal.name]: animal.residents.map(resident => resident.name)
+    animals.forEach(animal => {
+      if (!locations[animal.location]) {
+        locations[animal.location] = [];
+      }
+      locations[animal.location].push(animal.name);
+    });
+    Object.keys(locations).forEach(location => {
+      locations[location].forEach((animal, index) => {
+        const animalObj = animals.find(animalObj => animalObj.name === animal);
+        locations[location][index] = { [animal]: animalObj.residents.map(resident => resident.name) };
       });
-    }
+    });
     return locations;
   }
-  );
 }
 
 function animalPopularity(rating) {
@@ -82,7 +86,8 @@ function animalPopularity(rating) {
 
   if (rating) {
     const animalsByRating = animals.filter(animal => animal.rating === rating);
-    return animalsByRating.map(animal => animal.name);
+    console.log(animalsByRating)
+    return animalsByRating;
   }
 }
 
@@ -123,9 +128,10 @@ function employeeByName(employeeName) {
 
 function managersForEmployee(idOrName) {
   const employees = data.employees;
-  const employee = employees.find(employee => employee.id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName);
-  const managers = employees.filter(manager => employee.managers.includes(manager.id));
-  return managers;
+  if (typeof idOrName === 'string') {
+    const managers = employees.filter(employee => employee.managers.includes(employee.id));
+    return managers.map(manager => `${manager.firstName} ${manager.lastName}`);
+  }
 }
 
 function employeeCoverage(idOrName) {

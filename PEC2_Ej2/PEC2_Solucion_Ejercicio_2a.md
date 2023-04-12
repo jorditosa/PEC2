@@ -1,1 +1,0 @@
-## ¿Por qué es el valor de this es undefined?
