@@ -44,10 +44,7 @@ class ExpenseService {
     }
 
     updateBalance() {
-        let balance = 0;
-        this.expenses.forEach(expense => {
-            balance += expense.amount;
-        });
-        return balance;
+        const balance = new Balance();
+        return balance.updateBalance(this.expenses);
     }
 }

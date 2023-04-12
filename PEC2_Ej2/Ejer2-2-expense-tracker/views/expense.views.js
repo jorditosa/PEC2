@@ -65,29 +65,26 @@ class ExpenseView {
         const deleteButton = this.createElement("button", "delete-btn");
         deleteButton.textContent = "X";
 
+        // Boton editar
+        const editButton = this.createElement("button", "edit-btn");
+        editButton.textContent = "Edit";
+
         //Montar todo el nodo
         li.classList.add(expense.amount < 0 ? "minus" : "plus")
-        li.append(textNode, amountNode, deleteButton)
+        li.append(textNode, amountNode, editButton, deleteButton)
 
         // Montar el nodo en el DOM
         this.list.appendChild(li)
+
+        // Actualizar el balance
+        this.balance.textContent = expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2);
+        this.money_plus.textContent = expenses.filter(expense => expense.amount > 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2);
+        this.money_minus.textContent = expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2);
       });
     }
 
      // Debugging
      console.log(expenses)
-  }
-
-  displayBalance(balance) {
-    this.balance.textContent = balance;
-  }
-
-  displayIncome(income) {
-    this.money_plus.textContent = income;
-  }
-
-  displayExpense(expense) {
-    this.money_minus.textContent = expense;
   }
 
   bindAddExpense(handler) {
@@ -112,17 +109,11 @@ class ExpenseView {
   }
 
   bindEditExpense(handler) {
-    this.list.addEventListener("input", e => {
-      if(e.target.classList.contains("editable")) {
-        const id = e.target.parentElement.id;
-        const text = e.target.innerText;
-        handler(id, text)
+    this.list.addEventListener("click", e => {
+      if(e.target.classList.contains("edit-btn")) {
+        const id = +(e.target.parentElement.id);
+        handler(id)
       }
-    });
-  } 
-
-  bindUpdateBalance(handler) {
-
+    });    
   }
-
 }
