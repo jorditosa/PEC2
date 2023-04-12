@@ -77,9 +77,9 @@ class ExpenseView {
         this.list.appendChild(li)
 
         // Actualizar el balance
-        this.balance.textContent = expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2);
-        this.money_plus.textContent = expenses.filter(expense => expense.amount > 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2);
-        this.money_minus.textContent = expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2);
+        this.balance.textContent = expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+        this.money_plus.textContent = expenses.filter(expense => expense.amount > 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+        this.money_minus.textContent = expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
       });
     }
 
@@ -112,7 +112,9 @@ class ExpenseView {
     this.list.addEventListener("click", e => {
       if(e.target.classList.contains("edit-btn")) {
         const id = +(e.target.parentElement.id);
-        handler(id)
+        const text = e.target.parentElement.children[0].textContent;
+        const amount = e.target.parentElement.children[1].textContent;
+        handler(id, text, amount)
       }
     });    
   }

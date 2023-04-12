@@ -37,14 +37,8 @@ class ExpenseService {
     }
 
     deleteExpense(_id) {
-        const filteredExpenses = this.expenses.filter(({ id }) => id !== _id);
-        this.expenses = filteredExpenses;
+        this.expenses = this.expenses.filter(({ id }) => id !== _id);
+        
         this._commit(this.expenses);
-        return filteredExpenses;
-    }
-
-    updateBalance() {
-        const balance = new Balance();
-        return balance.updateBalance(this.expenses);
     }
 }

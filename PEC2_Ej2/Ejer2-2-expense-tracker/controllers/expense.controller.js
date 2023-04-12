@@ -11,7 +11,6 @@ class ExpenseController {
 
         // Mostrando las expenses iniciales
         this.onExpenseListChanged(this.service.expenses);
-
     }
 
     onExpenseListChanged = expenses => {
@@ -29,9 +28,4 @@ class ExpenseController {
     handleEditExpense = (id, text, amount) => {
         this.service.editExpense(id, text, amount);
     }
-
-    handleUpdateBalance = () => {
-        this.service.updateBalance();
-    }
-
 }

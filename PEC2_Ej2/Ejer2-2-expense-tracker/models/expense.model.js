@@ -9,17 +9,3 @@ class Expense {
         return new Date().getTime();
         }    
   }
-  
-  class Balance {
-    constructor(balance) {
-      this.balance = balance;
-    }
-
-    updateBalance(expenses) {
-        let balance = 0;
-        expenses.forEach(expense => {
-            balance += expense.amount;
-        });
-        return balance;
-    }
-  }
