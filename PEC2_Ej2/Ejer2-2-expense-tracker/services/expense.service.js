@@ -34,14 +34,4 @@ class ExpenseService {
         
         this._commit(this.expenses);
     }
-
-    updateIncomeOutput(expenses) {
-        const total = expenses.filter(expense => expense.amount > 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
-        return total;
-    }
-
-    updateExpenseOutput(expenses) {
-        const total = expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
-        return total;
-    }
 }

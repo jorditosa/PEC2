@@ -15,6 +15,7 @@ class ExpenseController {
 
     onExpenseListChanged = expenses => {
         this.view.displayExpenses(expenses);
+        this.view.displayInfo(expenses);
     }
 
     handleAddExpense = (text, amount) => {

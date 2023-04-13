@@ -19,25 +19,21 @@ class ExpenseView {
     return this.amount.value;
   }
 
-  get _expenses() {
-    return JSON.parse(localStorage.getItem("expenses"));
-  }
-
   resetInputs() {
     this.text.value = ""
     this.amount.value = ""
   }
 
-  updateBalance(_expenses) {
-    return _expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+  updateBalance(expenses) {
+    return expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
   }
 
-  updateIncomeOutput(_expenses) {
-    return _expenses.filter(expense => expense.amount >= 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+  updateIncomeOutput(expenses) {
+    return expenses.filter(expense => expense.amount >= 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
   }
 
-  updateExpenseOutput(_expenses) {
-    return _expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+  updateExpenseOutput(expenses) {
+    return expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
   }
 
   createElement(tag, className) {
@@ -57,11 +53,6 @@ class ExpenseView {
   displayExpenses(expenses) {
     // Eliminar nodos
     this.list.innerHTML = "";
-
-    // Mostrar Balance e información de los incomes y expenses
-    this.balance.textContent = this.updateBalance(expenses)
-    this.money_plus.textContent = this.updateIncomeOutput(expenses)
-    this.money_minus.textContent = this.updateExpenseOutput(expenses)
 
     // Mostrar un mensaje si no hay ningún dato y sino crear la lista en el DOM
     if(expenses.length === 0) {
@@ -101,6 +92,13 @@ class ExpenseView {
      console.log(expenses)
   }
 
+  displayInfo(expenses) {
+     // Mostrar Balance e información de los incomes y expenses
+     this.balance.textContent = this.updateBalance(expenses)
+     this.money_plus.textContent = this.updateIncomeOutput(expenses)
+     this.money_minus.textContent = this.updateExpenseOutput(expenses)
+  }
+
   bindAddExpense(handler) {
     this.form.addEventListener("submit", e => {
       e.preventDefault();
@@ -108,8 +106,6 @@ class ExpenseView {
       if(this._expenseText && this._expenseAmount) {
         handler(this._expenseText, this._expenseAmount)
       }
-
-      this.bindUpdateBalance();
 
       this.resetInputs()
     })
