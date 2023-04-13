@@ -52,7 +52,6 @@ function animalMap(options) {
     return locations;
   }
 
- // with specified options, returns names of animals
   if (options.includeNames) {
     const locations = {};
     animals.forEach(animal => {
@@ -85,9 +84,14 @@ function animalPopularity(rating) {
   }
 
   if (rating) {
-    const animalsByRating = animals.filter(animal => animal.rating === rating);
-    console.log(animalsByRating)
-    return animalsByRating;
+    const animalsByPopularity = {};
+    animals.forEach(animal => {
+      if (!animalsByPopularity[animal.popularity]) {
+        animalsByPopularity[animal.popularity] = [];
+      }
+      animalsByPopularity[animal.popularity].push(animal.name);
+    });
+    return animalsByPopularity[rating];
   }
 }
 
