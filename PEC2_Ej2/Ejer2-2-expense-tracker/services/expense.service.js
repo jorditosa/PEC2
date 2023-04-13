@@ -24,7 +24,9 @@ class ExpenseService {
     }
 
     editExpense( _id, updatedText, updatedAmount) {
-        this.expenses = this.expenses.map(expense => expense.id === _id ? { ...expense, text: updatedText, amount: updatedAmount } : expense);
+        this.expenses = this.expenses.filter(expense => expense.id === _id ? { ...expense, text: updatedText, amount: updatedAmount } : expense);
+
+        this.deleteExpense(_id)
 
         this._commit(this.expenses)
     }

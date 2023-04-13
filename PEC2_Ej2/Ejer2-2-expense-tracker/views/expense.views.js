@@ -25,6 +25,7 @@ class ExpenseView {
   }
 
   updateBalance(expenses) {
+    console.log('editando', expenses)
     return expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
   }
 
@@ -48,6 +49,11 @@ class ExpenseView {
     const element = document.querySelector(selector);
 
     return element;
+  }
+
+  populateForm(text, amount) {
+    this.text.value = text;
+    this.amount.value = amount;
   }
 
   displayExpenses(expenses) {
@@ -87,7 +93,6 @@ class ExpenseView {
         this.list.appendChild(li);
       });
     }
-
      // Debugging
      console.log(expenses)
   }
@@ -124,9 +129,11 @@ class ExpenseView {
     this.list.addEventListener("click", e => {
       if(e.target.classList.contains("edit-btn")) {
         const id = +(e.target.parentElement.id);
-        const text = e.target.parentElement.childNodes[0].textContent;
-        const amount = e.target.parentElement.childNodes[1].textContent;
-        handler(id, text, amount)
+        const textInput = e.target.parentElement.childNodes[0].textContent;
+        const amountInput = e.target.parentElement.childNodes[1].textContent;
+        this.populateForm(textInput, amountInput);       
+
+        handler(id, textInput, amountInput);
     }
     });
   }

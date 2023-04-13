@@ -147,6 +147,17 @@ input[type='number'] {
   transition: opacity 0.3s ease;
 }
 
+.edit-btn {
+  cursor: pointer;
+  background-color: #9c88ff;
+  border: 0;
+  color: #fff;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 2px 5px;
+  transition: opacity 0.3s ease;
+}
+
 .list li:hover .delete-btn {
   opacity: 1;
 }
