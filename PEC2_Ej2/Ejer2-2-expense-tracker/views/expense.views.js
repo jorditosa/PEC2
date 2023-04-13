@@ -7,6 +7,8 @@ class ExpenseView {
     this.form = document.getElementById('form');
     this.text = document.getElementById('text');
     this.amount = document.getElementById('amount');
+
+    this.editBtn = document.getElementById('edit-btn');
   }
 
   get _expenseText() {
@@ -17,8 +19,8 @@ class ExpenseView {
     return this.amount.value;
   }
 
-  get _balance() {
-    return this.balance.value;
+  get _expenses() {
+    return JSON.parse(localStorage.getItem("expenses"));
   }
 
   resetInputs() {
@@ -40,8 +42,8 @@ class ExpenseView {
     return element;
   }
 
-  displayBalance(expenses) {
-    console.log('Balance update', expenses)
+ /*  displayBalance(expenses) {
+    console.log('Balance update->', expenses)
     return expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €'; 
   }
 
@@ -51,16 +53,14 @@ class ExpenseView {
 
   displayMoneyMinus(expenses) {
     return expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
-  }
+  } */
 
   displayExpenses(expenses) {
     // Eliminar nodos
     this.list.innerHTML = "";
 
-    // Actualizar el balance, y cantidades de ingresos y gastos
-    this.balance.textContent = this.displayBalance(expenses);
-    this.money_plus.textContent = this.displayMoneyPlus(expenses);
-    this.money_minus.textContent = this.displayMoneyMinus(expenses);
+    // Mostrar Balance
+    this.balance.textContent = expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
 
     // Mostrar un mensaje si no hay ningún dato y sino crear la lista en el DOM
     if(expenses.length === 0) {
@@ -92,7 +92,7 @@ class ExpenseView {
         li.append(textNode, amountNode, editButton, deleteButton)
 
         // Montar el nodo en el DOM
-        this.list.appendChild(li)
+        this.list.appendChild(li);
       });
     }
 
@@ -125,10 +125,14 @@ class ExpenseView {
     this.list.addEventListener("click", e => {
       if(e.target.classList.contains("edit-btn")) {
         const id = +(e.target.parentElement.id);
-        const text = e.target.parentElement.children[0].textContent;
-        const amount = e.target.parentElement.children[1].textContent;
+        const text = e.target.parentElement.childNodes[0].textContent;
+        const amount = e.target.parentElement.childNodes[1].textContent;
         handler(id, text, amount)
-      }
-    });    
+    }
+    });
+  }
+
+  bindUpdateBalance(handler) {
+    handler(this._expenses);
   }
 }

@@ -8,6 +8,7 @@ class ExpenseController {
         this.view.bindAddExpense(this.handleAddExpense);
         this.view.bindDeleteExpense(this.handleDeleteExpense);
         this.view.bindEditExpense(this.handleEditExpense);
+        this.view.bindUpdateBalance(this.handleUpdateBalance);
 
         // Mostrando las expenses iniciales
         this.onExpenseListChanged(this.service.expenses);
@@ -27,5 +28,9 @@ class ExpenseController {
 
     handleEditExpense = (id, text, amount) => {
         this.service.editExpense(id, text, amount);
+    }
+
+    handleUpdateBalance = (expenses) => {
+        this.service.updateBalance(expenses);
     }
 }

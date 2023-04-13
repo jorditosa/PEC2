@@ -24,14 +24,7 @@ class ExpenseService {
     }
 
     editExpense( _id, updatedText, updatedAmount) {
-        this.expenses = this.expenses.map(expense => {
-            expense.id === _id ? new Expense({
-                ...expense,
-                text: updatedText,
-                amount: updatedAmount
-            })
-            : expense
-        })
+        this.expenses = this.expenses.map(expense => expense.id === _id ? { ...expense, text: updatedText, amount: updatedAmount } : expense);
 
         this._commit(this.expenses)
     }
@@ -40,5 +33,10 @@ class ExpenseService {
         this.expenses = this.expenses.filter(({ id }) => id !== _id);
         
         this._commit(this.expenses);
+    }
+
+    updateBalance(expenses) {
+        const total = expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+        return total;
     }
 }
