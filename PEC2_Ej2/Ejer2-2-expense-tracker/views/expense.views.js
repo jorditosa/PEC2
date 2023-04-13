@@ -28,6 +28,18 @@ class ExpenseView {
     this.amount.value = ""
   }
 
+  updateBalance(_expenses) {
+    return _expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+  }
+
+  updateIncomeOutput(_expenses) {
+    return _expenses.filter(expense => expense.amount >= 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+  }
+
+  updateExpenseOutput(_expenses) {
+    return _expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+  }
+
   createElement(tag, className) {
     const element = document.createElement(tag);
 
@@ -42,25 +54,14 @@ class ExpenseView {
     return element;
   }
 
- /*  displayBalance(expenses) {
-    console.log('Balance update->', expenses)
-    return expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €'; 
-  }
-
-  displayMoneyPlus(expenses) {
-    return expenses.filter(expense => expense.amount > 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
-  }
-
-  displayMoneyMinus(expenses) {
-    return expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
-  } */
-
   displayExpenses(expenses) {
     // Eliminar nodos
     this.list.innerHTML = "";
 
-    // Mostrar Balance
-    this.balance.textContent = expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+    // Mostrar Balance e información de los incomes y expenses
+    this.balance.textContent = this.updateBalance(expenses)
+    this.money_plus.textContent = this.updateIncomeOutput(expenses)
+    this.money_minus.textContent = this.updateExpenseOutput(expenses)
 
     // Mostrar un mensaje si no hay ningún dato y sino crear la lista en el DOM
     if(expenses.length === 0) {
@@ -108,6 +109,8 @@ class ExpenseView {
         handler(this._expenseText, this._expenseAmount)
       }
 
+      this.bindUpdateBalance();
+
       this.resetInputs()
     })
   }
@@ -130,9 +133,5 @@ class ExpenseView {
         handler(id, text, amount)
     }
     });
-  }
-
-  bindUpdateBalance(handler) {
-    handler(this._expenses);
   }
 }
