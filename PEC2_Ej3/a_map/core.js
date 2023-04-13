@@ -23,6 +23,7 @@ function onlyVowels(array) {
 }
 
 function doubleMatrix(array) {
+  console.log(array)
   return array.map((row) => {
     return row.map((number) => {
       return number * 2;

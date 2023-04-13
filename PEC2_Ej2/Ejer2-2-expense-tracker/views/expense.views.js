@@ -44,6 +44,11 @@ class ExpenseView {
     // Eliminar nodos
     this.list.innerHTML = "";
 
+    // Actualizar el balance
+    this.balance.textContent = expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+    this.money_plus.textContent = expenses.filter(expense => expense.amount > 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+    this.money_minus.textContent = expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
+
     // Mostrar un mensaje si no hay ningún dato y sino crear la lista en el DOM
     if(expenses.length === 0) {
       const p = this.createElement("p");
@@ -75,11 +80,6 @@ class ExpenseView {
 
         // Montar el nodo en el DOM
         this.list.appendChild(li)
-
-        // Actualizar el balance
-        this.balance.textContent = expenses.reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
-        this.money_plus.textContent = expenses.filter(expense => expense.amount > 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
-        this.money_minus.textContent = expenses.filter(expense => expense.amount < 0).reduce((acc, expense) => acc + expense.amount, 0).toFixed(2) + ' €';
       });
     }
 

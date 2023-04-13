@@ -13,9 +13,11 @@ Seguidamente, en la preparación del async, declaro todas las funciones como asy
 Finalmente, para ejecutar promesas en paralelo, utilizo el PromiseAll y pongo las dos funciones findOne dentro de un array, y tal cúal se indica se llamaran a la vez sin que la segunda deba esperar al resultado de la primera.
 
 **Ejercicio_2**
+Dificultad máxima con el MVC a pelo.
+Primeramente he repasado los bindings existentes para la palabra reservada *this* (explicitos, implicitos, lexical binding de las arrow functions, ...)
 
 
 **Ejercicio_3**
-
+Ejercicios a prueba y error. Los test realmente son unos excelentes chivatos para debuguear y poder ver exactamente porque falla el valor retornado de cualquier función.
 
 
