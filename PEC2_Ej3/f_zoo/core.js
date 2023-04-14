@@ -111,9 +111,22 @@ function animalsByIds(ids) {
 
 function animalByName(animalName) {
   if (!animalName) return {};
-  const animals = data.animals;
-  const animal = animals.find(animal => animal.name === animalName);
-  return animal;
+  
+  const animal = data.animals.find(animal => 
+    animal.residents.find(resident => resident.name === animalName)
+  );
+  
+  if (!animal) return null;
+
+  const resident = animal.residents.find(resident => resident.name === animalName);
+  const { name, sex, age } = resident;
+
+  return {
+    name,
+    sex,
+    age,
+    species: animal.name,
+  };
 }
 
 
