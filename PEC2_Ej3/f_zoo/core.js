@@ -145,28 +145,21 @@ function employeeByName(employeeName) {
 
 function managersForEmployee(idOrName) {
   const employees = data.employees;
+
   if (typeof idOrName === 'string') {
-    const managers = employees.filter(employee => employee.managers.includes(employee.id));
-    return managers.map(manager => `${manager.firstName} ${manager.lastName}`);
+    const employee = employees.find(employee => employee.firstName === idOrName || employee.lastName === idOrName);
+    const manager = employees.find(employee => employee.id === employee.managers[0]);
+    return [manager.firstName, manager.lastName];
+  }
+
+  if (typeof idOrName === 'number') {
+    const employee = employees.find(employee => employee.id === idOrName);
+    const manager = employees.find(employee => employee.id === employee.managers[0]);
+    return [manager.firstName, manager.lastName];
   }
 }
 
 function employeeCoverage(idOrName) {
-  if (!idOrName) {
-    const employees = data.employees;
-    const employeesCoverage = {};
-    employees.forEach(employee => {
-      employeesCoverage[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map(id => animalByName(id).name);
-    });
-    return employeesCoverage;
-  }
-
-  if (idOrName) {
-    const employee = employeesByIds([idOrName])[0];
-    const employeeCoverage = {};
-    employeeCoverage[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map(id => animalByName(id).name);
-    return employeeCoverage;
-  }
 
 }
 

@@ -15,8 +15,9 @@ Finalmente, para ejecutar promesas en paralelo, utilizo el PromiseAll y pongo la
 
 ## Ejercicio_2
 
-Dificultad máxima con el MVC a pelo.
-Primeramente he repasado los bindings existentes para la palabra reservada _this_ (explicitos, implicitos, lexical binding de las arrow functions, ...)
+En la tónica de las asignaturas de JavaScript del máster, hay que tirarse a los leones sin prácticas regulares...las asignaturas de introducción se realizaban ejercicios semanales y creo, almenos de manera personal, que ayudaban muchisimo a hacer pasito a pasito como debe ser en el aprendizaje del lenguaje. Tirarse de cabeza contra los test es high level total.
+
+bueno, el desarrollo ha sido primeramente he repasado los bindings existentes para la palabra reservada _this_ (explicitos, implicitos, lexical binding de las arrow functions, ...)
 
 En un primer momento, preparé la app con las 3 capas **modelo**, **vista** y **controlador**, pero, documentandome y viendo que la **service** sirve para lógica de negocio, rehice la app con los 4 módulos.
 
@@ -35,4 +36,6 @@ _Controllers_ -> Finalmente, en el controlador preparo los bindings para cada ac
 
 ## Ejercicio_3
 
-Ejercicios a prueba y error. Los test realmente son unos excelentes chivatos para debuguear y poder ver exactamente porque falla el valor retornado de cualquier función.
+Ejercicios a prueba y error. Los test realmente son unos excelentes chivatos para debuguear y poder ver exactamente porque falla el valor retornado de cualquier función.  
+
+Por tiempo no me ha sido posible superar todas las funciones, han sido de un nivel altisimo.
